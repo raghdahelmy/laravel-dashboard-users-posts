@@ -15,6 +15,10 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
+        @filamentStyles
+
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -29,10 +33,14 @@
                 </header>
             @endif
 
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
         </div>
+        @filamentScripts
+@livewireScripts
+
     </body>
 </html>
