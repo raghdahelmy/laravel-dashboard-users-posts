@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Filament\Notifications\Notification;
+use App\Http\Requests\Posts\StoreRequest;
+use App\Http\Requests\Posts\UpdateRequest;
 
 class postController extends Controller
 {
@@ -14,15 +17,18 @@ class postController extends Controller
     public function index()
     {
         //
-        $posts = Post::orderBy('created_at','desc')->get();
+        $posts = Post::with('user')->orderBy('created_at','desc')->get();
         // dd($posts);
+        $posts = Post::with('comments.replies')->orderBy('created_at','desc')->get();
+
+
         return view('users.post', ['posts' => $posts]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create():View
     {
         //
         return view('users.PostCreat');
@@ -31,17 +37,18 @@ class postController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request):RedirectResponse
     {
         //
-        $request->validate([
-'title'=> 'required|min:2|max:100',
-'description'=>'required|min:2|max:255',
-        ]);
+//         $request->validate([
+// 'title'=> 'required|min:2|max:100',
+// 'description'=>'required|min:2|max:255',
+//         ]);
 
         Post::create([
             "description"=> $request->description,
             'title'=>$request->title,
+            "user_id" => auth()->id(),
         ]);
         Notification::make()
             ->title("Success!")
@@ -57,9 +64,10 @@ class postController extends Controller
             //     'message' => 'Your post is now live!'
             // ]);
 
-            session()->flash('notification', 'Your post is now live. The world is ready to hear your voice!');
+            // session()->flash('notification', 'Your post is now live. The world is ready to hear your voice!');
 
-return redirect()->route('posts.index');
+return to_route('posts.index');
+// return redirect()->route('posts.index');
     }
 
     /**
@@ -68,6 +76,7 @@ return redirect()->route('posts.index');
     public function show(string $id)
     {
         //
+
     }
 
     /**
@@ -84,20 +93,21 @@ return redirect()->route('posts.index');
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
         //
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-        ]);
+        // $request->validate([
+        //     'title' => 'required|string|max:255',
+        //     'description' => 'required|string',
+        // ]);
         $post = Post::find($id);
         $post->title = $request->title;
         $post->description = $request->description;
 $post->save();
 session()->flash('message', 'Your post is updated');
 
-return redirect()->route("posts.index");
+return to_route("posts.index");
+// return redirect()->route("posts.index");
     }
 
     /**
@@ -112,6 +122,7 @@ return redirect()->route("posts.index");
 
         session()->flash('messagee', 'Your post is deleted');
 
-        return redirect()->route("posts.index");
+        return to_route("posts.index");
+        // return redirect()->route("posts.index");
     }
 }

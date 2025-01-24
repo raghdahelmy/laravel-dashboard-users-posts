@@ -9,7 +9,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form method='post' action = {{route('users.store')}}>
+                    <form method='post' action = "{{route('users.store')}}">
                         @csrf
                         {{-- في اي هاكينج يرفض الداتا عشان بتعمل توكين --}}
                         <div class="mb-3">
