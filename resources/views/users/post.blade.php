@@ -60,7 +60,7 @@
                           <div class="form-floating">
   <textarea class="form-control" placeholder="Leave a comment here" name="content" id="floatingTextarea"></textarea>
   <input type="hidden" name="post_id" value="{{ $post->id }}">
-<input type="hidden" name="parent_comment_id" value="{{ $parent_comment_id ?? null }}">
+<input type="hidden">
 
   <label for="floatingTextarea">Write Your comment !</label>
 </div>
@@ -74,12 +74,12 @@
                                         <li class="list-group-item">
                                             <h6>{{ $comment->user->name ?? 'Unknown User' }}</h6>
                                             <p>{{ $comment->content }}</p>
-                                            <small>Created at: {{ $post->created_at->format('F j, Y, g:i a') }}</small>
+                                            <small>{{__('Created at:')}} {{ $post->created_at->format('F j, Y, g:i a') }}</small>
                                             <div class="d-flex gap-2 ">
-                                <a href="{{Route('comments.edit', $post->id)}}" class="btn btn-outline-primary mb-2 ">{{__("edit")}}</a>
+                                <a href="{{Route('comments.edit', $comment->id)}}" class="btn btn-outline-primary mb-2 ">{{__("edit")}}</a>
 
 
-                                <form action="{{ route('comments.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-outline-danger p-2 mb-2 " name='button'>{{__('delete')}}</button>

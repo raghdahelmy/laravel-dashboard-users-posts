@@ -23,7 +23,7 @@
                       </div>
                       <div class="mb-3">
                         <label  class="form-label">{{__('Description')}}</label>
-                        <textarea class="form-control" name = 'description' rows="3" value="{{$posts->description}}"></textarea>
+                        <textarea class="form-control" name = 'description' rows="3" >{{$posts->description}}</textarea>
                         @error('description')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror

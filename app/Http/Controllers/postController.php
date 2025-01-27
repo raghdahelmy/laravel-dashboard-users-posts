@@ -19,7 +19,7 @@ class postController extends Controller
         //
         $posts = Post::with('user')->orderBy('created_at','desc')->get();
         // dd($posts);
-        $posts = Post::with('comments.replies')->orderBy('created_at','desc')->get();
+        $posts = Post::with('comments')->orderBy('created_at','desc')->get();
 
 
         return view('users.post', ['posts' => $posts]);

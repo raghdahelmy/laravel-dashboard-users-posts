@@ -4,7 +4,8 @@
             {{ __('Edit comments') }}
         </h2>
     </x-slot>
-    <form action="{{route('comments.update',$comment->id)}}" method="POST" class="mt-2">
+    <div class = " bg-white overflow-hidden shadow-sm sm:rounded-lg m-5 p-4">
+    <form action="{{route('comments.update',$comment->id)}}" method="POST" class=" mx-auto w-50 m-3">
                             @csrf
                             @method('PATCH')
 
@@ -13,8 +14,8 @@
         {{ session('messagee') }}
     </div> @endif
 
-                          <div class="form-floating">
-  <textarea class="form-control" name="content" id="floatingTextarea">{{$comment->content}}</textarea>
+    <div class="form-floating ">
+  <textarea class ="form-control" name="content" id="floatingTextarea">{{$comment->content}}</textarea>
   <input type="hidden" name="post_id" value="{{ $comment->post_id }}">
 <input type="hidden" name="parent_comment_id" value="{{ $comment->parent_comment_id ?? null }}">
 
@@ -23,8 +24,9 @@
 @error('content')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
-  <button type="submit" class="btn btn-outline-secondary m-2">Save</button>
+  <button type="submit" class="btn btn-outline-primary mt-3">Save</button>
                           </form>
+                        </div>
 
 
 </x-app-layout>

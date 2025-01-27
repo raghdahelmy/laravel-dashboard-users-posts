@@ -34,10 +34,10 @@ class CommentController extends Controller
         //
 Comment::create([
     'post_id'=>$request->post_id,
-    'parent_comment_id'=>$request->parent_comment_id,
+    'parent_comment_id'=>null,
      'content'=>$request->content,
-     'created_at'=>now(),
      'user_id'=>auth()->id(),
+
 ]);
 Notification::make()
             ->title("Success!")
@@ -64,6 +64,7 @@ Notification::make()
     {
         //
         $comment = Comment::find($id);
+        // dd($comment);
         return view('users.commentEdit',compact('comment'));
     }
 
@@ -75,7 +76,6 @@ Notification::make()
         //
         $comment=Comment::find($id);
         $comment->content=$request->content;
-        $comment->parent_comment_id = $request->parent_comment_id ?? $comment->parent_comment_id;
         $comment->save();
         session()->flash('message', 'Your post is updated');
         return to_route("posts.index");
