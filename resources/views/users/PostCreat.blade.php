@@ -4,7 +4,7 @@
             {{ __('Create Post !') }}
         </h2>
     </x-slot>
-    <form method="Post" action="{{Route('posts.store')}}">
+    <form method="Post" action="{{route('posts.store')}}">
         @csrf
     <div class="py-6 mt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

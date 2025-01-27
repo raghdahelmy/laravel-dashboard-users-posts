@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['post_id', 'parent_comment_id', 'content','created_at'];
+    protected $fillable = ['post_id', 'parent_comment_id', 'content','user_id','created_at'];
     use HasFactory;
     public function post()
     {

@@ -64,7 +64,7 @@ class postController extends Controller
             //     'message' => 'Your post is now live!'
             // ]);
 
-            // session()->flash('notification', 'Your post is now live. The world is ready to hear your voice!');
+            session()->flash('notification', 'Your post is now live');
 
 return to_route('posts.index');
 // return redirect()->route('posts.index');
