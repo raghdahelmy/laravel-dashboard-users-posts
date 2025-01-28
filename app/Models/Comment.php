@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    
+
 
     protected $fillable = ['post_id', 'parent_comment_id', 'content','user_id','created_at'];
     use HasFactory;
@@ -21,7 +21,7 @@ class Comment extends Model
 }
     public function replies()
     {
-        return $this->hasMany(Comment::class, 'parent_comment_id');
+        return $this->hasMany(Reply::class, 'parent_comment_id');
     }
     public function parentComment()
     {

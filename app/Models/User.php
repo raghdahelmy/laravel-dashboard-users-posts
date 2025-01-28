@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class)->whereNull('parent_comment_id');
     }
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }

@@ -32,21 +32,20 @@ class CommentController extends Controller
     public function store(StoreRequest $request)
     {
         //
-Comment::create([
-    'post_id'=>$request->post_id,
-    'parent_comment_id'=>null,
-     'content'=>$request->content,
-     'user_id'=>auth()->id(),
+        Comment::create([
+            'post_id' => $request->post_id,
+            'parent_comment_id' => null,
+            'content' => $request->content,
+            'user_id' => auth()->id(),
 
-]);
-Notification::make()
-            ->title("Success!")
-            ->body("Your post is now live. The world is ready to hear your voice!")
-            ->success()
-            ->send();
-            session()->flash('notification', 'comment added ');
-         return to_route('posts.index');
-
+        ]);
+        // Notification::make()
+        //             ->title("Success!")
+        //             ->body("Your post is now live. The world is ready to hear your voice!")
+        //             ->success()
+        //             ->send();
+        session()->flash('notification', 'comment added ');
+        return to_route('posts.index');
     }
 
     /**
@@ -65,7 +64,7 @@ Notification::make()
         //
         $comment = Comment::find($id);
         // dd($comment);
-        return view('users.commentEdit',compact('comment'));
+        return view('users.commentEdit', compact('comment'));
     }
 
     /**
@@ -74,13 +73,11 @@ Notification::make()
     public function update(UpdateRequest $request, string $id)
     {
         //
-        $comment=Comment::find($id);
-        $comment->content=$request->content;
+        $comment = Comment::find($id);
+        $comment->content = $request->content;
         $comment->save();
         session()->flash('message', 'Your post is updated');
         return to_route("posts.index");
-
-
     }
 
     /**

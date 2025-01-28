@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\postController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\postController;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RepliesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('users',userController::class);
     Route::resource("posts",postController::class);
     Route::resource('comments', CommentController::class);
+    Route::resource('replies', RepliesController::class);
 });
 
 
