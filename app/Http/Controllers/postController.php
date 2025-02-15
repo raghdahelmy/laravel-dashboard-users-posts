@@ -76,7 +76,6 @@ return to_route('posts.index');
     public function show(string $id)
     {
         //
-
     }
 
     /**

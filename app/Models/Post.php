@@ -14,6 +14,7 @@ class Post extends Model
         'user_id'
     ];
     use HasFactory;
+    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -23,4 +24,6 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class)->whereNull('parent_comment_id');
     }
+
+
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 use Termwind\Components\Dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\users\UserUpdate;
 
 class userController extends Controller
 {
@@ -17,7 +18,7 @@ class userController extends Controller
         //
         $users = User::all();
         // dd($users);
-       return view("users.all" , ['users'=>$users]);//firt 'users' from folder blade, second $users from database
+       return view("users.all" , ['users'=>$users]);
     //   return view('users.all' , compact('users'));
     }
 
@@ -48,33 +49,75 @@ class userController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
+    // public function show(string $id)
     {
         //
+        // $user = User::with('post')->findOrFail($id);
+        // dd($user);
+// $data = $user->load('post');
+// في طريقة تانيه اجيب بيها الكود واعمل بايند اني ادي للفانكشن شو 2 براميتر
+// اول واحد وهو المودل يوزر وتاني برامزوهو ال اي دي
+//  وممكن نبدل ال اي دي بالاسم الاصفر الي بين الكيرلي براكتس الي ف الروت ليست
+// $data = $user->with('post')->get();
+// dd($data);
+// ممكن ابدل الويز والجيت ب لوووووووود
+$data = $user->load('post');
+
+return view('users.ShowUsers',compact('data'));
+
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         //
+        // $user = User::find($id);
+        return view("users.EditUsers", compact('user'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserUpdate $request, User $user)
     {
         //
+        $user->update([
+           ' name' => $request->name ,
+            'email' => $request->email,
+        ]);
+
+        // $users = User::find($id);
+        // $users->email = $request->email ;
+        // $users->name = $request->name;
+        // $users->save();
+        session()->flash('message', 'Your User is updated');
+        return to_route('users.index');
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
+
+        $user->delete();
+        session()->flash('message', 'USER is deleted in trashed');
+        //return redirect()->back();
+        return to_route('users.index');
+
+    }
+
+    public function trashed()
+    {
+        $users = User::onlyTrashed()->get();
+        return view('users.trashed', compact('users'));
     }
 }

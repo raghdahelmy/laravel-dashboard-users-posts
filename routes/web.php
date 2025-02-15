@@ -37,6 +37,7 @@ Route::prefix('admin')->group(function(){
     Route::resource("posts",postController::class);
     Route::resource('comments', CommentController::class);
     Route::resource('replies', RepliesController::class);
+    Route::get('/users/trashed', [userController::class, 'trashed'])->name('admin.users.trashed');
 });
 
 

@@ -35,9 +35,9 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
-                <div class="p-6 text-gray-900 d-flex gap-2">
+                <div class="p-6 text-gray-900 row g-2">
                     @forelse ($posts as $index=>$post )
-                    <div class="card mt-2 col-lg-4 col-md-6 col-sm-12">
+                    <div class="card col-lg-4 col-md-6 col-sm-12">
                         <div class="card-body">
                             <small>{{ $post->user->name ?? 'Unknown User' }}</small>
 
