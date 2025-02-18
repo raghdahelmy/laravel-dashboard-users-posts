@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\postController;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RepliesController;
@@ -33,12 +33,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('admin')->group(function(){
-    Route::resource('users',userController::class);
+    Route::resource('users',UserController::class);
     Route::resource("posts",postController::class);
     Route::resource('comments', CommentController::class);
     Route::resource('replies', RepliesController::class);
-    Route::get('/users/trashed', [userController::class, 'trashed'])->name('admin.users.trashed');
+    Route::get('trashed/users', [UserController::class, 'trashed'])->name('users.trashed');
+    // Route::delete('users/force-delete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
+    // Route::delete('users/{13}/delete', [UserController::class, 'deleteUser'])->name('users.delete');
+
+
 });
-
-
 require __DIR__.'/auth.php';

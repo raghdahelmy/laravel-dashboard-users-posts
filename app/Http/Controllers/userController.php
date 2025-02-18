@@ -38,11 +38,15 @@ class userController extends Controller
     {
         //
         // dd($request);
-        User::create([
+        $user = User::create([
 'name'=>$request->name,
 'email'=>$request->email,
 'password'=>Hash::make($request->password),
         ]);
+        if ($request->hasFile('image')){
+            $user->addMedia($request->file('image'))->toMediaCollection("users");
+        }
+
         return redirect()->route('users.index');
     }
 
@@ -117,7 +121,27 @@ return view('users.ShowUsers',compact('data'));
 
     public function trashed()
     {
-        $users = User::onlyTrashed()->get();
-        return view('users.trashed', compact('users'));
+        $users = User::onlyTrashedTrashed()->get()
+;return view ('users.trashed',compact('users'));
+
     }
+
+
+// public function forceDelete($id)
+// {
+//     User::whereIn('id', [13, 14])->forceDelete();
+
+// }
+
+// public function deleteUser($id)
+// {
+//     $user = User::find($id);
+
+//     if ($user) {
+//         $user->forceDelete();
+//         return response()->json(['message' => 'User deleted successfully']);
+//     } else {
+//         return response()->json(['message' => 'User not found'], 404);
+//     }
+// }
 }

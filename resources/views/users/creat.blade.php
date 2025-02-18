@@ -9,26 +9,31 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form method='post' action = "{{route('users.store')}}">
+                    <form method='post' action="{{route('users.store')}}" enctype="multipart/form-data">
                         @csrf
                         {{-- في اي هاكينج يرفض الداتا عشان بتعمل توكين --}}
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">{{__('name')}}</label>
-                          <input type="text" class="form-control" name='name'>
+                            <label for="exampleInputEmail1" class="form-label">{{__('name')}}</label>
+                            <input type="text" class="form-control" name='name'>
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">{{__("email")}}</label>
                             <input type="email" class="form-control" name='email'>
-                          </div>
+                        </div>
 
                         <div class="mb-3">
-                          <label  class="form-label">{{__('password')}}</label>
-                          <input type="password" class="form-control" name='password'>
+                            <label class="form-label">{{__('password')}}</label>
+                            <input type="password" class="form-control" name='password'>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">{{__('upload image')}}</label>
+                            <input class="form-control" type="file" name ="image">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Add</button>
-                      </form>
+                    </form>
 
                 </div>
             </div>

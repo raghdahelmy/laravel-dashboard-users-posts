@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        
+        'deleted_at',
+
     ];
 
     /**
@@ -58,4 +63,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reply::class);
     }
+    public function registerMediaConversions(?Media $media = null): void
+{
+    $this
+        ->addMediaConversion('preview')
+        ->fit(Fit::Contain, 300, 300)
+        ->nonQueued();
+}
 }

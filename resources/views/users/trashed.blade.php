@@ -8,4 +8,5 @@
     {{ __('Restore') }} -->
 </a>
     </x-slot>
+   
 </x-app-layout>

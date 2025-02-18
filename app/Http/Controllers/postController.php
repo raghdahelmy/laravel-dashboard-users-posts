@@ -50,11 +50,11 @@ class postController extends Controller
             'title'=>$request->title,
             "user_id" => auth()->id(),
         ]);
-        Notification::make()
-            ->title("Success!")
-            ->body("Your post is now live. The world is ready to hear your voice!")
-            ->success()
-            ->send();
+        // Notification::make()
+        //     ->title("Success!")
+        //     ->body("Your post is now live. The world is ready to hear your voice!")
+        //     ->success()
+        //     ->send();
             // dd('Notification sent');
 
             // session()->flash('message', 'Your post is now live!');

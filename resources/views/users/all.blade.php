@@ -4,7 +4,7 @@
             {{ __('Users') }}
         </h2>
         <a class = "btn btn-primary pt-2 mt-3" href= "{{route('users.create')}}" >{{__('Add User')}}</a>
-        <a class = "btn btn-danger pt-2 mt-3" href="{{ route('admin.users.trashed') }}">Trashed Users</a>
+        <a class = "btn btn-danger pt-2 mt-3" href="{{ route('users.trashed') }}">Trashed Users</a>
     </x-slot>
 
     @if (session('message'))

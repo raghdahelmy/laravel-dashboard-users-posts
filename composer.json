@@ -15,7 +15,9 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.5",
-        "nesbot/carbon": "^2.72"
+        "nesbot/carbon": "^2.72",
+        "openspout/openspout": "4.23",
+        "spatie/laravel-medialibrary": "^11.12"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
@@ -68,6 +70,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.3"
         }
     },
     "minimum-stability": "stable",
