@@ -18,8 +18,8 @@ class userController extends Controller
         //
         $users = User::all();
         // dd($users);
-       return view("users.all" , ['users'=>$users]);
-    //   return view('users.all' , compact('users'));
+        return view("users.all", ['users' => $users]);
+        //   return view('users.all' , compact('users'));
     }
 
     /**
@@ -39,11 +39,11 @@ class userController extends Controller
         //
         // dd($request);
         $user = User::create([
-'name'=>$request->name,
-'email'=>$request->email,
-'password'=>Hash::make($request->password),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $user->addMedia($request->file('image'))->toMediaCollection("users");
         }
 
@@ -59,18 +59,16 @@ class userController extends Controller
         //
         // $user = User::with('post')->findOrFail($id);
         // dd($user);
-// $data = $user->load('post');
-// في طريقة تانيه اجيب بيها الكود واعمل بايند اني ادي للفانكشن شو 2 براميتر
-// اول واحد وهو المودل يوزر وتاني برامزوهو ال اي دي
-//  وممكن نبدل ال اي دي بالاسم الاصفر الي بين الكيرلي براكتس الي ف الروت ليست
-// $data = $user->with('post')->get();
-// dd($data);
-// ممكن ابدل الويز والجيت ب لوووووووود
-$data = $user->load('post');
+        // $data = $user->load('post');
+        // في طريقة تانيه اجيب بيها الكود واعمل بايند اني ادي للفانكشن شو 2 براميتر
+        // اول واحد وهو المودل يوزر وتاني برامزوهو ال اي دي
+        //  وممكن نبدل ال اي دي بالاسم الاصفر الي بين الكيرلي براكتس الي ف الروت ليست
+        // $data = $user->with('post')->get();
+        // dd($data);
+        // ممكن ابدل الويز والجيت ب لوووووووود
+        $data = $user->load('post');
 
-return view('users.ShowUsers',compact('data'));
-
-
+        return view('users.ShowUsers', compact('data'));
     }
 
     /**
@@ -81,7 +79,6 @@ return view('users.ShowUsers',compact('data'));
         //
         // $user = User::find($id);
         return view("users.EditUsers", compact('user'));
-
     }
 
     /**
@@ -91,7 +88,7 @@ return view('users.ShowUsers',compact('data'));
     {
         //
         $user->update([
-           ' name' => $request->name ,
+            ' name' => $request->name,
             'email' => $request->email,
         ]);
 
@@ -101,8 +98,6 @@ return view('users.ShowUsers',compact('data'));
         // $users->save();
         session()->flash('message', 'Your User is updated');
         return to_route('users.index');
-
-
     }
 
     /**
@@ -116,32 +111,30 @@ return view('users.ShowUsers',compact('data'));
         session()->flash('message', 'USER is deleted in trashed');
         //return redirect()->back();
         return to_route('users.index');
-
     }
 
     public function trashed()
     {
-        $users = User::onlyTrashedTrashed()->get()
-;return view ('users.trashed',compact('users'));
-
+        $users = User::onlyTrashed()->get();
+        return view('users.trashed', compact('users'));
     }
 
 
-// public function forceDelete($id)
-// {
-//     User::whereIn('id', [13, 14])->forceDelete();
+    // public function forceDelete($id)
+    // {
+    //     User::whereIn('id', [13, 14])->forceDelete();
 
-// }
+    // }
 
-// public function deleteUser($id)
-// {
-//     $user = User::find($id);
+    // public function deleteUser($id)
+    // {
+    //     $user = User::find($id);
 
-//     if ($user) {
-//         $user->forceDelete();
-//         return response()->json(['message' => 'User deleted successfully']);
-//     } else {
-//         return response()->json(['message' => 'User not found'], 404);
-//     }
-// }
+    //     if ($user) {
+    //         $user->forceDelete();
+    //         return response()->json(['message' => 'User deleted successfully']);
+    //     } else {
+    //         return response()->json(['message' => 'User not found'], 404);
+    //     }
+    // }
 }
