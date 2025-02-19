@@ -37,10 +37,12 @@ Route::prefix('admin')->group(function(){
     Route::resource("posts",postController::class);
     Route::resource('comments', CommentController::class);
     Route::resource('replies', RepliesController::class);
-    Route::get('trashed/users', [UserController::class, 'trashed'])->name('users.trashed');
-    // Route::delete('users/force-delete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
-    // Route::delete('users/{13}/delete', [UserController::class, 'deleteUser'])->name('users.delete');
+    Route::prefix('user')->group(function(){
+ Route::get('trashed', [UserController::class, 'trashed'])->name('users.trashed');
+ Route::delete('{id}/forcedelete',[UserController::class,'forceDelete'])->name('users.forcedelete');
+ Route::patch('{id}/restore',[UserController::class,'restore'])->name('users.restore');
 
+    });
 
 });
 require __DIR__.'/auth.php';

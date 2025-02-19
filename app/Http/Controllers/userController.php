@@ -116,25 +116,28 @@ class userController extends Controller
     public function trashed()
     {
         $users = User::onlyTrashed()->get();
+
         return view('users.trashed', compact('users'));
     }
 
 
-    // public function forceDelete($id)
-    // {
-    //     User::whereIn('id', [13, 14])->forceDelete();
+    public function forceDelete($id)
+    {
+$user = User::withTrashed()->findOrFail($id);
+        $user->forceDelete();
+        session()->flash('message', 'User permanently deleted');
+        // return to_route('users.trashed');
+        return redirect()->route('users.trashed');
 
-    // }
+    }
 
-    // public function deleteUser($id)
-    // {
-    //     $user = User::find($id);
+    public function restore($id)
+    {
 
-    //     if ($user) {
-    //         $user->forceDelete();
-    //         return response()->json(['message' => 'User deleted successfully']);
-    //     } else {
-    //         return response()->json(['message' => 'User not found'], 404);
-    //     }
-    // }
+       $users = User::withTrashed()->find($id);
+        $users->restore();
+        session()->flash('message', 'User restored successfully.');
+
+        return to_route('users.trashed');
+    }
 }

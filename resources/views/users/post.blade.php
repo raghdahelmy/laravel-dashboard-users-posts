@@ -33,11 +33,11 @@
 
 
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
-                <div class="p-6 text-gray-900 row g-2">
+        <div class="container max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class=" row bg-white overflow-hidden shadow-sm sm:rounded-lg ">
+                <div class=" text-gray-900 d-flex flex-wrap justify-content-between">
                     @forelse ($posts as $index=>$post )
-                    <div class="card col-lg-4 col-md-6 col-sm-12">
+                    <div class="card col-lg-3 col-md-4 col-sm-6 m-4">
                         <div class="card-body">
                             <small>{{ $post->user->name ?? 'Unknown User' }}</small>
 
@@ -47,7 +47,7 @@
                                 <a href="{{Route('posts.edit', $post->id)}}" class="btn btn-success mb-2 ">{{__("edit")}}</a>
 
 
-                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('{{$post->user->name}}Are you sure you want to delete this post?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger p-2 mb-2 " name='button'>{{__('delete')}}</button>

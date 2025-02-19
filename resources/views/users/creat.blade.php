@@ -14,22 +14,22 @@
                         {{-- في اي هاكينج يرفض الداتا عشان بتعمل توكين --}}
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">{{__('name')}}</label>
-                            <input type="text" class="form-control" name='name'>
+                            <input type="text" class="form-control sm:rounded-lg" name='name'>
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">{{__("email")}}</label>
-                            <input type="email" class="form-control" name='email'>
+                            <input type="email" class="form-control sm:rounded-lg" name='email'>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">{{__('password')}}</label>
-                            <input type="password" class="form-control" name='password'>
+                            <input type="password" class="form-control sm:rounded-lg" name='password'>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">{{__('upload image')}}</label>
-                            <input class="form-control" type="file" name ="image">
+                            <input class="form-control sm:rounded-lg" type="file" name ="image">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Add</button>

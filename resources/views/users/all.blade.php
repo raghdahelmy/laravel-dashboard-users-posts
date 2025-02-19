@@ -4,7 +4,7 @@
             {{ __('Users') }}
         </h2>
         <a class = "btn btn-primary pt-2 mt-3" href= "{{route('users.create')}}" >{{__('Add User')}}</a>
-        <a class = "btn btn-danger pt-2 mt-3" href="{{ route('users.trashed') }}">Trashed Users</a>
+        <a class = "btn btn-danger pt-2 mt-3" href="{{ route('users.trashed') }}">{{__("Trashed Users")}}</a>
     </x-slot>
 
     @if (session('message'))
@@ -35,7 +35,7 @@
                             <td>
                                 <a href="{{route('users.show',$user->id)}}" class="btn btn-dark">{{__('show')}}</a>
                                 <a href="{{route('users.edit',$user->id)}}" class="btn btn-dark">{{__('edit')}}</a>
-                                <form action="{{route('users.destroy',$user->id)}}" method= POST>
+                                <form action="{{route('users.destroy',$user->id)}}" method= "POST" onsubmit="return confirm('{{$user->name}} Are you sure you want to delete this post?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger my-2">{{__('delete')}}</button>

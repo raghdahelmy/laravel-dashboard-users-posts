@@ -21,7 +21,7 @@
                         @csrf
                         @method('PATCH')
                         {{-- في اي هاكينج يرفض الداتا عشان بتعمل توكين --}}
-                        <!-- <input name='id' value="{{$user->id}}" hidden > -->
+                        <input name='id' value="{{$user->id}}" hidden >
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label ">{{__('Name')}}</label>
                             <input type="text" class="form-control sm:rounded-lg" name='name' value=" {{$user->name}}" >
