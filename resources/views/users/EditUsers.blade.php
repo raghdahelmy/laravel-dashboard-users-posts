@@ -17,25 +17,29 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form method="POST" action="{{route('users.update',$user->id)}}">
+                    <form method="POST" action="{{route('users.update',$user->id)}}" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         {{-- في اي هاكينج يرفض الداتا عشان بتعمل توكين --}}
-                        <input name='id' value="{{$user->id}}" hidden >
+                        <input name='id' value="{{$user->id}}" hidden>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label ">{{__('Name')}}</label>
-                            <input type="text" class="form-control sm:rounded-lg" name='name' value=" {{$user->name}}" >
+                            <input type="text" class="form-control sm:rounded-lg" name='name' value=" {{$user->name}}">
                             @error('name')
-    <div class="alert alert-danger">{{ $message }}</div>
-@enderror
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label ">{{__("Email")}}</label>
-                            <input type="email" class="form-control sm:rounded-lg" name='email' value=" {{$user->email}}" >
+                            <input type="email" class="form-control sm:rounded-lg" name='email' value=" {{$user->email}}">
                             @error('email')
-    <div class="alert alert-danger">{{ $message }}</div>
-@enderror
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            <div class="mb-3">
+                                <label class="form-label">{{__('upload image')}}</label>
+                                <input class="form-control sm:rounded-lg" type="file" name="image">
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
 

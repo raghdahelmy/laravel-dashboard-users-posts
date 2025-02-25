@@ -20,15 +20,19 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
+                            <th scope="col">{{__('image')}}</th>
                             <th scope="col">{{__('name')}}</th>
                             <th scope="col">{{__('email')}}</th>
                             <th scope="col">{{__('created_at')}}</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @forelse ($users as $index=>$user  )
+                          @forelse ($users as $index=>$user)
                           <tr>
                             <th scope="row">{{ intval($index)+1}}</th>
+                            <td>
+                                <img src="{{$user->getFirstMediaUrl('users')}}" alt="{{$user->getFirstMedia('users')->file_name ?? 'user profile pic'}}" width="100" height="100">
+                            </td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->created_at}}</td>

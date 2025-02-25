@@ -56,6 +56,7 @@ class userController extends Controller
     public function show(User $user)
     // public function show(string $id)
     {
+
         //
         // $user = User::with('post')->findOrFail($id);
         // dd($user);
@@ -68,7 +69,7 @@ class userController extends Controller
         // ممكن ابدل الويز والجيت ب لوووووووود
         $data = $user->load('post');
 
-        return view('users.ShowUsers', compact('data'));
+        return view('users.ShowUsers', compact('user'));
     }
 
     /**
@@ -91,7 +92,11 @@ class userController extends Controller
             ' name' => $request->name,
             'email' => $request->email,
         ]);
+if($request->hasFile('image')){
+    $user->clearMediaCollection('users');
+    $user->addMedia($request->file('image'))->toMediaCollection('users');
 
+}
         // $users = User::find($id);
         // $users->email = $request->email ;
         // $users->name = $request->name;
