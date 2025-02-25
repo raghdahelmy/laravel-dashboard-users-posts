@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Trashed Users') }}
+            {{ __('messages.Trashed Users') }}
         </h2>
 
     </x-slot>
@@ -40,12 +40,12 @@
                                         <form action="{{route('users.forcedelete', $user->id)}}" method="POST" method="POST" onsubmit="return confirm('{{$user->name}} Are you sure you want to delete this post?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger py-1 ms-2" type="submit">{{ __('delete') }}</button>
+                                            <button class="btn btn-danger py-1 ms-2" type="submit">{{ __('messages.delete') }}</button>
                                         </form>
                                         <form action="{{route('users.restore',$user->id)}}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <button class="btn btn-success py-1 ms-2">{{ __('Restore') }} </button>
+                                            <button class="btn btn-success py-1 ms-2">{{ __('messages.Restore') }} </button>
                                         </form>
                                     </div>
                                 </td>
@@ -55,13 +55,13 @@
                     </table>
 
                     @else
-                    <h1>No deleted users</h1>
+                    <h1>{{__("messages.No deleted users")}}</h1>
                     @endif
                     <div>
                     </div>
                 </div>
             </div>
-            <a class="btn btn-dark py-2 my-3" href="{{route('users.index')}}">{{__('Back to Users')}}</a>
+            <a class="btn btn-dark py-2 my-3" href="{{route('users.index')}}">{{__('messages.Back to Users')}}</a>
         </div>
 
     </div>

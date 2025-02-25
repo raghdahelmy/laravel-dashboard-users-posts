@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users') }}
+            {{ __('messages.Users') }}
         </h2>
-        <a class = "btn btn-primary pt-2 mt-3" href= "{{route('users.create')}}" >{{__('Add User')}}</a>
-        <a class = "btn btn-danger pt-2 mt-3" href="{{ route('users.trashed') }}">{{__("Trashed Users")}}</a>
+        <a class = "btn btn-primary pt-2 mt-3" href= "{{route('users.create')}}" >{{__('messages.Add User')}}</a>
+        <a class = "btn btn-danger pt-2 mt-3" href="{{ route('users.trashed') }}">{{__("messages.Trashed Users")}}</a>
     </x-slot>
 
     @if (session('message'))
@@ -20,10 +20,10 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">{{__('image')}}</th>
-                            <th scope="col">{{__('name')}}</th>
-                            <th scope="col">{{__('email')}}</th>
-                            <th scope="col">{{__('created_at')}}</th>
+                            <th scope="col">{{__('messages.image')}}</th>
+                            <th scope="col">{{__('messages.name')}}</th>
+                            <th scope="col">{{__('messages.email')}}</th>
+                            <th scope="col">{{__('messages.created_at')}}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -37,17 +37,17 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->created_at}}</td>
                             <td>
-                                <a href="{{route('users.show',$user->id)}}" class="btn btn-dark">{{__('show')}}</a>
-                                <a href="{{route('users.edit',$user->id)}}" class="btn btn-dark">{{__('edit')}}</a>
+                                <a href="{{route('users.show',$user->id)}}" class="btn btn-dark">{{__('messages.show')}}</a>
+                                <a href="{{route('users.edit',$user->id)}}" class="btn btn-dark">{{__('messages.edit')}}</a>
                                 <form action="{{route('users.destroy',$user->id)}}" method= "POST" onsubmit="return confirm('{{$user->name}} Are you sure you want to delete this post?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger my-2">{{__('delete')}}</button>
+                                    <button type="submit" class="btn btn-danger my-2">{{__('messages.delete')}}</button>
                                 </form>
                             </td>
                           </tr>
                             @empty
-                            <h1>Add user please</h1>
+                            <h1>{{__("messages.Add user please")}}</h1>
                             @endforelse
 
                         </tbody>
