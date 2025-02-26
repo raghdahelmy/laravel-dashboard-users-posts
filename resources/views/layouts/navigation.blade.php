@@ -8,6 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
+
                 </div>
 
                 <!-- Navigation Links -->
@@ -23,10 +24,12 @@
                         {{ __('messages.Posts') }}
                     </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -50,13 +53,44 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
+                <!-- <ul class= "m-2">
+    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+        <li>
+            <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                {{ $properties['native'] }}
+            </a>
+        </li>
+    @endforeach
+</ul> -->
+
+<!-- Dropdown menue -->
+<div class="dropdown m-2">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        {{__("messages.Language")}}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+            <li>
+                <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                    {{ $properties['native'] }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
+</div>
+
+<!-- =>button alter lang
+<a href="{{ LaravelLocalization::getLocalizedURL(app()->getLocale() == 'en' ? 'ar' : 'en', null, [], true) }}" class="btn btn-dark m-2">
+    {{ app()->getLocale() == 'en' ? 'العربية' : 'English' }}
+</a> -->
+
             </div>
 
             <!-- Hamburger -->
@@ -96,7 +130,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

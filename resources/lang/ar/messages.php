@@ -42,5 +42,6 @@ return [
     "replies:" => "الردود:",
     "No replies yet" => "لا يوجد ردود بعد",
     "No comments yet" => "لا يوجد تعليقات بعد",
+    "Language"=>"اللغة",
 ];
 

@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\postController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
@@ -19,7 +21,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () {
+Route::group(
+    [
+
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function () {
     Route::get('/', function () {
         return view('welcome');
     });
@@ -33,17 +40,29 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-
-    Route::prefix('admin')->group(function () {
-        Route::resource('users', UserController::class);
-        Route::resource("posts", postController::class);
-        Route::resource('comments', CommentController::class);
-        Route::resource('replies', RepliesController::class);
-        Route::prefix('user')->group(function () {
-            Route::get('trashed', [UserController::class, 'trashed'])->name('users.trashed');
-            Route::delete('{id}/forcedelete', [UserController::class, 'forceDelete'])->name('users.forcedelete');
-            Route::patch('{id}/restore', [UserController::class, 'restore'])->name('users.restore');
-        });
+Route::group(["prefix"=>"admin","middleware"=>"auth"], function(){
+    Route::resource('users', UserController::class);
+    Route::resource("posts", postController::class);
+    Route::resource('comments', CommentController::class);
+    Route::resource('replies', RepliesController::class);
+    Route::prefix('user')->group(function () {
+        Route::get('trashed', [UserController::class, 'trashed'])->name('users.trashed');
+        Route::delete('{id}/forcedelete', [UserController::class, 'forceDelete'])->name('users.forcedelete');
+        Route::patch('{id}/restore', [UserController::class, 'restore'])->name('users.restore');
     });
+});
+
+    // Route::middleware('auth')->prefix('admin')->group(function () {
+    //     Route::resource('users', UserController::class);
+    //     Route::resource("posts", postController::class);
+    //     Route::resource('comments', CommentController::class);
+    //     Route::resource('replies', RepliesController::class);
+    //     Route::prefix('user')->group(function () {
+    //         Route::get('trashed', [UserController::class, 'trashed'])->name('users.trashed');
+    //         Route::delete('{id}/forcedelete', [UserController::class, 'forceDelete'])->name('users.forcedelete');
+    //         Route::patch('{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    //     });
+    // });
+
 });
 require __DIR__ . '/auth.php';

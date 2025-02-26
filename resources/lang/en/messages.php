@@ -42,5 +42,6 @@ return [
     "replies:" => "Replies:",
     "No replies yet" => "No replies yet",
     "No comments yet" => "No comments yet",
+    "Language"=>"Language",
 ];
 
