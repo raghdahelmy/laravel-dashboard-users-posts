@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,12 +18,13 @@ class UserController extends Controller
         //
         // $users = User::all();
         $users = User::paginate(10);
-        return response()->json([
-        'success' => true,  // يوضح أن العملية تمت بنجاح
-        'message' => "Data is loaded successfully", // رسالة نجاح
-        'data' => UserResource::collection($users)
+        return UserResource::collection($users);
+        //return response()->json([
+        //'success' => true,  // يوضح أن العملية تمت بنجاح
+        //'message' => "Data is loaded successfully", // رسالة نجاح
+        //'data' => UserResource::collection($users)
         // البيانات المسترجعة
-    ], 200); // كود الاستجابة HTTP 200 (نجاح)
+  //  ], 200); // كود الاستجابة HTTP 200 (نجاح)
 
     }
 
@@ -40,6 +42,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        return new UserResource($user);
+//         return response()->json([
+//         'success' => true,  // يوضح أن العملية تمت بنجاح
+//         'message' => "Data is stored successfully", // رسالة نجاح
+//         'data'=> $user,
+//         //البيانات المسترجعة
+//    ], 200);
+
     }
 
     /**

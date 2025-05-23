@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\homeController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -28,9 +29,7 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name("home");
+    Route::get('/', homeController::class)->name("home");
 
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -42,7 +41,7 @@ Route::group(
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 Route::group(["prefix"=>"admin","middleware"=>["auth","admin"]], function(){
-    Route::get('dashboard', [DashboardController::class,'invoke'])->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
     Route::resource('users', UserController::class);
     Route::resource("posts", postController::class);
     Route::resource('comments', CommentController::class);
